@@ -1,5 +1,7 @@
 <template>
     <div class="search">
-        <h1>search TBD</h1>
+        <h1>{{$getSpaceSearch()}}</h1>
     </div>
 </template>
+
+

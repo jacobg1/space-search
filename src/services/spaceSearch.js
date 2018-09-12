@@ -1,9 +1,10 @@
-import axios from 'axios'
+// import axios from 'axios'
 
+// create search plugin object
 const spaceSearch = {}
 spaceSearch.install = function (Vue, options) {
-  
-    Vue.prototype.$getSpaceSearch = function () {
+  // create search instance
+  Vue.prototype.$getSpaceSearch = function () {
     let xxx = 'search!'
     return xxx
   }

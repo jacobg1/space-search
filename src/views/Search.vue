@@ -3,11 +3,17 @@
         
         <search-form :makeSearch="handleSearch"/>
 
-        <div v-for="(result, index) in results" :key="index">
-            <h1>{{result.title}}</h1>
-            <p>{{result.description}}</p>
+        <div class="image-holder" v-for="(result, index) in results" :key="index">
+            
+            <!-- <h1>{{ result.title }}</h1> -->
+            
+            <!-- <p>{{ result.description_508 }}</p> -->
+
+            <!-- <p class="keywords" v-for="(keyword, index) in result.keywords" :key="index">{{ keyword }}</p> -->
+            
             <img :src="result.href" :alt="result.title">
-        </div>
+       
+       </div>
 
     </div>
 </template>
@@ -51,3 +57,12 @@ export default {
     }
 }
 </script>
+
+
+<style scoped lang="scss">
+    .image-holder {
+        img {
+            max-width: 300px;
+        }
+    }
+</style>

@@ -3,19 +3,19 @@
         
         <search-form :makeSearch="handleSearch"/>
 
-        <Waterfall :resizable=true>
+        <Waterfall :gutterHeight=10 :gutterWidth=10 :resizable=true>
             
           <WaterfallItem :width=300 v-for="(result, index) in results" :key="index">
             
-            <img :src="result.href" :alt="result.title">
-            
             <h2>{{ result.title }}</h2>
-            
+
+            <img :src="result.href" :alt="result.title">
+                        
             <p>{{ result.description_508 }}</p>
 
-            <div class="keywords" v-for="(keyword, index) in result.keywords" :key="index">
+            <!-- <div class="keywords" v-for="(keyword, index) in result.keywords" :key="index">
                 <span>{{ keyword }}</span>
-            </div>
+            </div> -->
           
           </WaterfallItem>
           
@@ -73,17 +73,25 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// .item {
-//     width: 200px;
-  
-// }
-.search {
-   
-}
-img {
-    max-width: 291px;
+  .search {
+      background: #83add2;
   }
-// #test {
-//     width: 200px;
-// }
+  .waterfall-item {
+      background: #d3d3da;
+       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      img {
+        max-width: 265px;
+    }
+    h2 {
+        margin: 20px auto;
+        padding-top: 20px;
+        max-width: 287px;
+    }
+    p {
+        padding-bottom: 20px;
+        padding-bottom: 20px;
+    max-width: 280px;
+    margin: 20px auto;
+    }
+  }
 </style>

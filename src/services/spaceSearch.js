@@ -26,6 +26,11 @@ spaceSearch.install = function (Vue, options) {
         response.data.forEach(element => {
           dataArray.push(element)
         })
+        
+      })
+      .catch(function(error) {
+
+        console.log(error)
       })
       
     return dataArray

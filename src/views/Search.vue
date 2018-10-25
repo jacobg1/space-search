@@ -3,8 +3,11 @@
     <div class="search">
 
      <h2>Space Search</h2>
-    
-      <search-form :makeSearch="handleSearch"/>
+
+        <p class="form-error" v-if="noTerm">Please enter search term in input field</p>
+        <p class="form-error" v-if="noResult">No results please try again</p>
+
+        <search-form :makeSearch="handleSearch"/>
 
         <switch-view :listActive="isList" :makeSwitch="handleSwitch"/>
 
@@ -90,7 +93,6 @@ export default {
         // pull in waterfall components
         Waterfall,
         WaterfallItem,
-        PulseLoader
     },
 
     data() {
@@ -104,12 +106,18 @@ export default {
 
             // determins whether grid or list view
             // false is grid view, true is list view
-            isList: false
+            isList: false,
+
+            // boolean switch for no search term
+            noTerm: false,
+
+            // boolean switch for no results
+            noResult: false
 
         }
     },
     mounted: function () {
-        console.log('component mounted')
+        // console.log('component mounted')
         
     },
     methods: {
@@ -118,13 +126,38 @@ export default {
       // passing in input as argument  
       handleSearch ( searchTerm ) {
       
+      // error boolean for empty input
+      this.noTerm = false
+        
+        if (searchTerm) {
 
-        // get results of api call using plugin instance variable defined in services/spaceSearch.js   
-        let searchResults = this.$getSpaceSearch( searchTerm )
-         
-          // set results to array so that it can be displayed in component
-          this.results = searchResults
+            // reset boolean
+            this.noResult = false
+            
+            // get results of api call using plugin instance variable defined in services/spaceSearch.js   
+            let searchResults = this.$getSpaceSearch( searchTerm )
+            
+            // handle case of no results  
+            if(Object.keys(searchResults).length === 0) {
+              
+               this.noResult = true
+            } 
+
+            //reset boolean if results exist
+            if(this.results !== null) {
+              
+               this.noResult = false
+            } 
           
+           // set results to array so that it can be displayed in component
+           this.results = searchResults
+
+        } else {
+
+            //reset boolean
+            this.noTerm = true
+
+        }      
       },
 
       // switch between list an grid view  
@@ -149,6 +182,21 @@ export default {
       }
   }
 
+  .form-error {
+
+      color: #e3c4ff;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 79px;
+      margin-left: auto;
+      margin-right: auto;
+
+      @media(min-width: 440px) {
+          top: 104px;
+      }
+  }
+
   .search-form {
       input {
           width: 191px;
@@ -162,7 +210,7 @@ export default {
 
   .waterfall-item {
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-      
+
       h2,
       p {
           color: #e3c4ff;

@@ -4,7 +4,9 @@ import router from './router'
 
 import spaceSearch from './services/spaceSearch'
 import VueParticles from 'vue-particles'
+import Lightbox from 'vue-pure-lightbox'
 
+Vue.use(Lightbox)
 Vue.use(spaceSearch)
 Vue.use(VueParticles)
 

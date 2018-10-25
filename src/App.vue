@@ -18,21 +18,16 @@
         clickMode="push"
     >
     </vue-particles>
-
-
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/search">Search</router-link>
-    </div> -->
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-.search-form, .switch-view {
+.search-form,
+.switch-view {
   display: inline-block;
 }
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,21 +35,12 @@
   text-align: center;
   color: #2c3e50;
 }
+
 body,
 html {
-    height: 100%
+  height: 100%
 }
-.lightbox__thumbnail {
-  img {
-    max-width: 265px;
-  }
-}
-.lightbox__image {
-  padding: 10px;
-  img {
-    width: 80%;
-  }
-}
+
 #particles-js canvas {
   display: block;
   vertical-align: bottom;
@@ -65,6 +51,7 @@ html {
   -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
   transition: opacity .8s ease, transform 1.4s ease
 }
+
 #particles-js {
   width: 100%;
   height: 100%;
@@ -74,16 +61,20 @@ html {
   left: 0;
   background-color: #17182f;
 }
+
 #nav {
   padding: 30px;
+
   a {
     font-weight: bold;
     color: #2c3e50;
+
     &.router-link-exact-active {
       color: #42b983;
     }
   }
 }
+
 .shutter-button {
   display: inline-block;
   -webkit-transform: perspective(1px) translateZ(0);
@@ -96,6 +87,7 @@ html {
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
+
 .shutter-button:before {
   content: "";
   position: absolute;
@@ -115,34 +107,49 @@ html {
   transition-duration: 0.3s;
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
-    }
-.shutter-button:hover, 
+}
+
+.shutter-button:hover,
 .shutter-button:active,
 .shutter-button.active {
   color: #17182f;
 }
-.shutter-button:hover:before, 
+
+.shutter-button:hover:before,
 .shutter-button:active:before,
 .shutter-button.active:before {
   -webkit-transform: scaleY(1);
   transform: scaleY(1);
 }
-input:focus, 
+
+input:focus,
 .shutter-button:focus {
   outline-color: #f8dbff;
 }
-label, input, button {
+
+label,
+input,
+button {
   font-size: inherit;
   padding: 12px;
   margin: 0.1em 0.3em;
-  -moz-box-sizing: content-box; 
+  -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
+
 button {
   border: 1px solid #ffffff;
   background-color: #17182f;
   color: #ffffff;
   cursor: pointer;
 }
+
+.lightbox__image {
+  padding: 10px;
+
+  img {
+    width: 80% !important;
+  }
+   }  
 </style>

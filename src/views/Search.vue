@@ -1,47 +1,54 @@
 <template>
 
     <div class="search">
-      <!-- <pulse-loader :loading="loading" :color="color"></pulse-loader> -->
 
-      <h2>Space Search</h2>
-          
-
+     <h2>Space Search</h2>
+    
       <search-form :makeSearch="handleSearch"/>
 
         <switch-view :listActive="isList" :makeSwitch="handleSwitch"/>
 
-        <Waterfall :gutterHeight=10 :gutterWidth=10 :resizable=true v-if="!isList">
+        <Waterfall :gutterHeight=20 :gutterWidth=20 :resizable=true v-if="!isList">
 
-          <WaterfallItem :width=300 v-for="(result, index) in results" :key="index">
+          <WaterfallItem :width=290 v-for="(result, index) in results" :key="index">
+            
+            <h2 v-if="result.title">{{ result.title }}</h2>
+            <div v-if="result.href" class="grid-lightbox-holder">
 
-            <h2>{{ result.title }}</h2>
-            <!-- <img :src="result.href" :alt="result.title"> -->
             <lightbox
               :thumbnail=result.href
               :images="[result.href]"
               :alt="result.title"
             >
-            <!-- <lightbox-default-loader slot="loader"></lightbox-default-loader>  -->
+
+            <lightbox-default-loader slot="loader"></lightbox-default-loader> 
             </lightbox>
+            </div>
 
-            <p>{{ result.description_508 }}</p>
+            <p class="description" v-if="result.description_508">{{ result.description_508 }}</p>
+             
+             <div v-if="result.keywords" class="keyword-holder">
 
+                <p class="keyword-title">Keywords:</p>
            
-          </WaterfallItem>          
-
+                <p class="grid-keywords">{{result.keywords}}</p>
+                
+              </div>
+              <hr> 
+          </WaterfallItem>  
         </Waterfall>
 
         <div id="list" v-if="isList" v-for="(result, index) in results" :key="index">
               
-            <div class="list-container">
+            <div v-if="result" class="list-container">
 
-              <h2>{{ result.title }}</h2>
+              <h2 v-if="result.title">{{ result.title }}</h2>
             
               <p class="description" v-if="result.description_508">{{ result.description_508 }}</p>
 
-              <div class="keyword-holder">
+              <div class="keyword-holder" v-if="result.keywords">
 
-                <p class="keyword-title" v-if="result.keywords">Keywords:</p>
+                <p class="keyword-title">Keywords:</p>
            
                 <p>{{result.keywords}}</p>
                 
@@ -49,10 +56,17 @@
 
             </div>
 
+            <div v-if="result.href" class="list-image-container">
+
+              <lightbox
+                :thumbnail=result.href
+                :images="[result.href]"
+                :alt="result.title"
+              >
+              </lightbox>
+            </div>
         </div>
-
     </div>
-
 </template>
 
 
@@ -60,9 +74,7 @@
 
 import SearchForm from '@/components/SearchForm.vue'
 import SwitchView from '@/components/SwitchView'
-
 import { Waterfall, WaterfallItem } from 'vue2-waterfall'
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
 
@@ -89,7 +101,7 @@ export default {
 
             //keyword array
             keywords: null,
-            
+
             // determins whether grid or list view
             // false is grid view, true is list view
             isList: false
@@ -131,74 +143,133 @@ export default {
 
 <style scoped lang="scss">
   .search {
-    h2 {
-      color: #c2c2de;
-      font-size: 40px;
-    }
+      h2 {
+          color: #e3c4ff;
+          font-size: 40px;
+      }
   }
 
   .search-form {
       input {
-        width: 191px;
-        background-color: none;
+          width: 191px;
+          background-color: none;
       }
   }
-  
+
+  .waterfall {
+      padding-top: 22px;
+  }
+
   .waterfall-item {
-    /* background: #d3d3da; */
-    /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); */
-    /* box-shadow: 0px 0px 3px 0px rgba(169, 169, 169, 0.98); */
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
-    
-    h2, p {
-      color: #c2c2de;
-    }
-    h2 {
-      margin: 20px auto;
-      padding-top: 20px;
-      max-width: 287px;
-      font-size: 18px;
-    }
-    p {
-      padding-bottom: 20px;
-      padding-bottom: 20px;
-      max-width: 280px;
-      margin: 20px auto;
-      font-size: 15px;
-      font-weight: bold;
-    }
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      
+      h2,
+      p {
+          color: #e3c4ff;
+      }
+
+      h2 {
+          margin: 0 auto 20px auto;
+          padding-top: 20px;
+          max-width: 287px;
+          font-size: 18px;
+      }
+
+      p {
+          max-width: 253px;
+          padding-top: 15px;
+          margin: 0 auto;
+          font-size: 15px;
+          font-weight: bold;
+          color: #ff9999;
+      }
+
+      hr {
+          border-color: #e3c4ff;
+      }
+
+      .grid-keywords {
+          color: #ffffff;
+          padding: 15px 0;
+
+      }
+
+      .description {
+          color: #e3c4ff;
+      }
+
+  }
+
+  .grid-lightbox-holder {
+      max-width: 265px;
+      margin: 0 auto;
+
   }
 
   #list {
-    p, h2, .keywords {
-      text-align: left;
-    }
-    h2 {
-      font-size: 25px;
-    }
-    p {
-      color: #ffffff;
-      margin: 0;
-      font-weight: bold;
-    }
-    .keyword-holder {
-      margin-top: 20px;
-    }
-    .keyword-title {
-      padding-bottom: 5px;
-      color: #ff9999;
-    }
-    .list-container {
-      max-width: 600px;
-      margin: 79px auto;
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-    .description {
-      color: #c2c1df;
-      font-weight: bold;
-    }
+      max-width: 1100px;
+      margin: 62px auto;
+
+      p,
+      h2,
+      .keywords {
+          text-align: left;
+      }
+
+      h2 {
+          font-size: 25px;
+          max-width: 400px;
+      }
+
+      p {
+          color: #ffffff;
+          margin: 0;
+          font-weight: bold;
+          max-width: 289px;
+      }
+
+      .keyword-holder {
+          margin-top: 20px;
+      }
+
+      .keyword-title {
+          padding-bottom: 5px;
+          color: #ff9999;
+      }
+
+      .list-container {
+          /* max-width: 600px; */
+          margin: 79px auto 30px auto;
+          padding-left: 15px;
+          padding-right: 15px;
+          max-width: 400px;
+
+          @media(min-width: 778px) {
+              width: 40%;
+              margin: 0;
+              display: inline-block;
+              vertical-align: top;
+              max-width: 1100px;
+          }
+      }
+
+      .description {
+          color: #e3c4ff;
+          font-weight: bold;
+      }
+
+      .list-image-container {
+          width: 94%;
+          margin: 0 auto;
+          max-width: 400px;
+
+          @media(min-width: 778px) {
+              width: 40%;
+              display: inline-block;
+              max-width: 1100px;
+          }
+
+      }
   }
 
 </style>

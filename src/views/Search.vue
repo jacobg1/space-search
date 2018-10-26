@@ -14,7 +14,7 @@
         <Waterfall :gutterHeight=20 :gutterWidth=20 :resizable=true v-if="!isList">
 
           <WaterfallItem :width=290 v-for="(result, index) in results" :key="index">
-            
+
             <h2 v-if="result.title">{{ result.title }}</h2>
             <div v-if="result.href" class="grid-lightbox-holder">
 
@@ -37,7 +37,6 @@
                 <p class="grid-keywords">{{result.keywords}}</p>
                 
               </div>
-              <hr> 
           </WaterfallItem>  
         </Waterfall>
 
@@ -99,7 +98,7 @@ export default {
         return {
 
             // final result
-            results: null,
+            results: [],
 
             //keyword array
             keywords: null,
@@ -117,41 +116,40 @@ export default {
         }
     },
     mounted: function () {
-        // console.log('component mounted')
+    
         
+    },
+    watch: {
+        results: function () {
+
+            // :(:( TODO: fix this 
+            setTimeout(() => {
+                if (this.results.length === 0) {
+                    this.noResult = true
+                } else {
+                    this.noResult = false
+                }
+            }, 1000)
+        }
     },
     methods: {
         
       // handle search method will be passed down to child component search form
       // passing in input as argument  
       handleSearch ( searchTerm ) {
-      
+              
       // error boolean for empty input
-      this.noTerm = false
-        
-        if (searchTerm) {
 
-            // reset boolean
-            this.noResult = false
+      this.noTerm = false
+
+        if (searchTerm) {
             
             // get results of api call using plugin instance variable defined in services/spaceSearch.js   
             let searchResults = this.$getSpaceSearch( searchTerm )
             
-            // handle case of no results  
-            if(Object.keys(searchResults).length === 0) {
-              
-               this.noResult = true
-            } 
-
-            //reset boolean if results exist
-            if(this.results !== null) {
-              
-               this.noResult = false
-            } 
-          
-           // set results to array so that it can be displayed in component
-           this.results = searchResults
-
+            // set results to array so that it can be displayed in component
+            this.results = searchResults
+               
         } else {
 
             //reset boolean

@@ -15,7 +15,7 @@ spaceSearch.install = function (Vue, options) {
     // make get request with axios, passing in search term
     axios({
       method: 'GET',
-      url: `http://localhost:3001/search/${term}`,
+      url: process.env.VUE_APP_ROOT_API + term,
       headers: {
         'Content-Type': 'application/json'
       }

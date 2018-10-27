@@ -24,36 +24,36 @@
               :alt="result.title"
             >
 
-            <lightbox-default-loader slot="loader"></lightbox-default-loader> 
+            <lightbox-default-loader slot="loader"></lightbox-default-loader>
             </lightbox>
             </div>
 
             <p class="description" v-if="result.description_508">{{ result.description_508 }}</p>
-             
+
              <div v-if="result.keywords" class="keyword-holder">
 
                 <p class="keyword-title">Keywords:</p>
-           
+
                 <p class="grid-keywords">{{result.keywords}}</p>
-                
+
               </div>
-          </WaterfallItem>  
+          </WaterfallItem>
         </Waterfall>
 
         <div id="list" v-if="isList" v-for="(result, index) in results" :key="index">
-              
+
             <div v-if="result" class="list-container">
 
               <h2 v-if="result.title">{{ result.title }}</h2>
-            
+
               <p class="description" v-if="result.description_508">{{ result.description_508 }}</p>
 
               <div class="keyword-holder" v-if="result.keywords">
 
                 <p class="keyword-title">Keywords:</p>
-           
+
                 <p>{{result.keywords}}</p>
-                
+
               </div>
 
             </div>
@@ -71,7 +71,6 @@
     </div>
 </template>
 
-
 <script>
 
 import SearchForm from '@/components/SearchForm.vue'
@@ -80,94 +79,85 @@ import { Waterfall, WaterfallItem } from 'vue2-waterfall'
 
 export default {
 
-    // name of component, this is the parent component
-    name: 'search',
+  // name of component, this is the parent component
+  name: 'search',
 
-    // alias component to kebob case because conventions
-    components: {
-        'search-form' : SearchForm,
-        'switch-view' : SwitchView,
-        
+  // alias component to kebob case because conventions
+  components: {
+    'search-form': SearchForm,
+    'switch-view': SwitchView,
 
-        // pull in waterfall components
-        Waterfall,
-        WaterfallItem,
-    },
+    // pull in waterfall components
+    Waterfall,
+    WaterfallItem
+  },
 
-    data() {
-        return {
+  data () {
+    return {
 
-            // final result
-            results: [],
+      // final result
+      results: [],
 
-            //keyword array
-            keywords: null,
+      // keyword array
+      keywords: null,
 
-            // determins whether grid or list view
-            // false is grid view, true is list view
-            isList: false,
+      // determins whether grid or list view
+      // false is grid view, true is list view
+      isList: false,
 
-            // boolean switch for no search term
-            noTerm: false,
+      // boolean switch for no search term
+      noTerm: false,
 
-            // boolean switch for no results
-            noResult: false
+      // boolean switch for no results
+      noResult: false
 
-        }
-    },
-    mounted: function () {
-    
-    },
-    watch: {
-        results: function () {
+    }
+  },
+  mounted: function () {
 
-            // :(:( TODO: fix this 
-            setTimeout(() => {
-                if (this.results.length === 0) {
-                    this.noResult = true
-                } else {
-                    this.noResult = false
-                }
-            }, 1000)
-        }
-    },
-    methods: {
-        
-      // handle search method will be passed down to child component search form
-      // passing in input as argument  
-      handleSearch ( searchTerm ) {
-              
+  },
+  watch: {
+    results: function () {
+      // :(:( TODO: fix this
+    //   setTimeout(() => {
+    //     if (this.results.length === 0) {
+    //       this.noResult = true
+    //     } else {
+    //       this.noResult = false
+    //     }
+    //   }, 2000)
+    }
+  },
+  methods: {
+
+    // handle search method will be passed down to child component search form
+    // passing in input as argument
+    handleSearch (searchTerm) {
       // error boolean for empty input
 
       this.noTerm = false
 
-        if (searchTerm) {
-            
-            // get results of api call using plugin instance variable defined in services/spaceSearch.js   
-            let searchResults = this.$getSpaceSearch( searchTerm )
-            
-            // set results to array so that it can be displayed in component
-            this.results = searchResults
-               
-        } else {
+      if (searchTerm) {
+        // get results of api call using plugin instance variable defined in services/spaceSearch.js
+        let searchResults = this.$getSpaceSearch(searchTerm)
 
-            //reset boolean
-            this.noTerm = true
+        // set results to array so that it can be displayed in component
+        this.results = searchResults
+      } else {
+        // reset boolean
+        this.noTerm = true
+      }
+    },
 
-        }      
-      },
-
-      // switch between list an grid view  
-      handleSwitch ( switchView ) {
-       
-        if (switchView) {
-            this.isList = true;
-            
-        } else {
-            this.isList = false;
-        }
+    // switch between list an grid view
+    handleSwitch (switchView) {
+      if (switchView) {
+        this.isList = true
+      } else {
+        this.isList = false
       }
     }
+  }
 }
 </script>
 
@@ -181,7 +171,7 @@ export default {
         color: #82ceff;
     }
   }
-    
+
   .form-error {
 
       color: #e3c4ff;

@@ -2,7 +2,7 @@
 
     <div class="search">
 
-     <h2>Space Search</h2>
+     <h2 class="title">Space Search</h2>
 
         <p class="form-error" v-if="noTerm">Please enter search term in input field</p>
         <p class="form-error" v-if="noResult">No results please try again</p>
@@ -117,7 +117,6 @@ export default {
     },
     mounted: function () {
     
-        
     },
     watch: {
         results: function () {
@@ -178,8 +177,11 @@ export default {
           color: #e3c4ff;
           font-size: 40px;
       }
+      .title {
+        color: #82ceff;
+    }
   }
-
+    
   .form-error {
 
       color: #e3c4ff;
@@ -219,6 +221,7 @@ export default {
           padding-top: 20px;
           max-width: 287px;
           font-size: 18px;
+          color: #82ceff;
       }
 
       p {

@@ -96,7 +96,7 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #c2c2de;
+  background: #82ceff;
   -webkit-transform: scaleY(0);
   transform: scaleY(0);
   -webkit-transform-origin: 50%;
@@ -108,7 +108,9 @@ html {
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-
+.new-background:before {
+  background: #e2c4ff;
+}
 .shutter-button:hover,
 .shutter-button:active,
 .shutter-button.active {
@@ -124,7 +126,7 @@ html {
 
 input:focus,
 .shutter-button:focus {
-  outline-color: #f8dbff;
+  outline: none;
 }
 
 label,

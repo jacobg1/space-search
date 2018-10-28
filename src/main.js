@@ -10,9 +10,10 @@ Vue.use(Lightbox)
 Vue.use(spaceSearch)
 Vue.use(VueParticles)
 
-Vue.config.productionTip = true
-
 new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.config.productionTip = false
+Vue.config.devtools = false

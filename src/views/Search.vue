@@ -4,9 +4,6 @@
 
      <h2 class="title">Space Search</h2>
 
-        <p class="form-error" v-if="noTerm">Please enter search term in input field</p>
-        <p class="form-error" v-if="noResult">No results please try again</p>
-
         <search-form :makeSearch="handleSearch"/>
 
         <switch-view :listActive="isList" :makeSwitch="handleSwitch"/>
@@ -75,6 +72,7 @@
 
 import SearchForm from '@/components/SearchForm.vue'
 import SwitchView from '@/components/SwitchView'
+import { GlobalEventStore } from '../services/spaceSearch'
 import { Waterfall, WaterfallItem } from 'vue2-waterfall'
 
 export default {
@@ -103,59 +101,23 @@ export default {
 
       // determins whether grid or list view
       // false is grid view, true is list view
-      isList: false,
+      isList: false
 
-      // boolean switch for no search term
-      noTerm: false,
-
-      // boolean switch for no results
-      noResult: false
-
-    }
-  },
-  mounted: function () {
-
-  },
-  watch: {
-    results: function () {
-      // :(:( TODO: fix this
-    //   setTimeout(() => {
-    //     if (this.results.length === 0) {
-    //       this.noResult = true
-    //     } else {
-    //       this.noResult = false
-    //     }
-    //   }, 2000)
     }
   },
   methods: {
 
-    // handle search method will be passed down to child component search form
-    // passing in input as argument
-    handleSearch (searchTerm) {
-      // error boolean for empty input
+    // result of make search function called in SearchForm.vue
+    // pass down to SearchForm.vue as makeSearch
+    handleSearch (results) {
 
-      this.noTerm = false
-
-      if (searchTerm) {
-        // get results of api call using plugin instance variable defined in services/spaceSearch.js
-        let searchResults = this.$getSpaceSearch(searchTerm)
-
-        // set results to array so that it can be displayed in component
-        this.results = searchResults
-      } else {
-        // reset boolean
-        this.noTerm = true
-      }
+      // store results, will be looped through and displayed 
+      this.results = results
+   
     },
-
     // switch between list an grid view
     handleSwitch (switchView) {
-      if (switchView) {
-        this.isList = true
-      } else {
-        this.isList = false
-      }
+        this.isList = !this.isList
     }
   }
 }
@@ -172,20 +134,7 @@ export default {
     }
   }
 
-  .form-error {
-
-      color: #e3c4ff;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 79px;
-      margin-left: auto;
-      margin-right: auto;
-
-      @media(min-width: 440px) {
-          top: 104px;
-      }
-  }
+  
 
   .search-form {
       input {

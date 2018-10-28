@@ -14,8 +14,7 @@
 
 <script>
 
-import { EventBus } from '../services/spaceSearch'
-
+import { GlobalEventStore } from '../services/spaceSearch'
 
 export default {
 
@@ -31,8 +30,11 @@ export default {
     // create variable to hold the search term
     // this will be passed up to parent component in makeSearch callback
     return {
+      
+      // variable to hold search form input
       searchTerm: '',
 
+      // variable to hold result length  
       resultLength: '',
 
       // boolean switch for no search term
@@ -41,22 +43,38 @@ export default {
   },
   methods: {
     getSearch (searchTerm) {
+       
+      // reset noTerm
       this.noTerm = false
 
+      // reset resultLength  
       this.resultLength = ''
 
+      // only fire if search term is not null  
       if (searchTerm) {
-        let results = this.$getSpaceSearch(searchTerm)
-        //   console.log(results)
-        this.testResults = results
 
+        // make the search with search term  
+        let results = this.$getSpaceSearch(searchTerm)
+        
+        // send results to search view
         this.makeSearch(results)
-        EventBus.$on('check-length', this.checkLength)
+
+        // listen for check length event and call checkLength
+        GlobalEventStore.$on('check-length', this.checkLength)
+
       } else {
+        // if no search term set noTerm to true  
         this.noTerm = true
       }
     },
+
+    // check result length
     checkLength (length) {
+    
+    // stop listening to event until another search is made
+    GlobalEventStore.$off('check-length')
+
+      // if searchterm, store length in result length
       if (!this.noTerm) {
         this.resultLength = length
       }
@@ -122,6 +140,20 @@ export default {
         -webkit-transform: scaleY(1);
         transform: scaleY(1);
     }
+    .form-error {
+
+      color: #e3c4ff;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 79px;
+      margin-left: auto;
+      margin-right: auto;
+
+      @media(min-width: 440px) {
+          top: 104px;
+      }
+  }
 
 }
 </style>

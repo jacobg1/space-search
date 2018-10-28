@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <vue-particles 
+    <vue-particles
        color="#ffffff"
         :particleOpacity="1"
         :particlesNumber="355"
@@ -153,5 +153,5 @@ button {
   img {
     width: 80% !important;
   }
-   }  
+   }
 </style>

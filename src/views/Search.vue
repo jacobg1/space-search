@@ -72,7 +72,6 @@
 
 import SearchForm from '@/components/SearchForm.vue'
 import SwitchView from '@/components/SwitchView'
-import { GlobalEventStore } from '../services/spaceSearch'
 import { Waterfall, WaterfallItem } from 'vue2-waterfall'
 
 export default {
@@ -110,14 +109,12 @@ export default {
     // result of make search function called in SearchForm.vue
     // pass down to SearchForm.vue as makeSearch
     handleSearch (results) {
-
-      // store results, will be looped through and displayed 
+      // store results, will be looped through and displayed
       this.results = results
-   
     },
     // switch between list an grid view
     handleSwitch (switchView) {
-        this.isList = !this.isList
+      this.isList = !this.isList
     }
   }
 }
@@ -133,8 +130,6 @@ export default {
         color: #82ceff;
     }
   }
-
-  
 
   .search-form {
       input {

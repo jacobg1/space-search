@@ -1,5 +1,7 @@
 /* eslint-disable */
+import Vue from 'vue'
 import axios from 'axios'
+export const EventBus = new Vue();
 
 // create search plugin object
 const spaceSearch = {}
@@ -8,7 +10,7 @@ spaceSearch.install = function (Vue, options) {
 
   // create search instance
   Vue.prototype.$getSpaceSearch = function (term) {
-
+// console.log(term)
     // create empty array that will hold search results
     var dataArray = []
 
@@ -26,7 +28,9 @@ spaceSearch.install = function (Vue, options) {
         response.data.forEach(element => {
           dataArray.push(element)
         })
-        
+        // console.log(dataArray.length)
+        EventBus.$emit('check-length', dataArray.length);
+
       })
       .catch(function(error) {
 

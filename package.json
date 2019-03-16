@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
-		"format": "prettier --write \"**/*.js\""
+		"format": "prettier --write \"**/*.js\" && prettier --write \"**/*.vue\""
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -35,7 +35,16 @@
       "plugin:vue/essential",
       "@vue/standard"
     ],
-    "rules": {},
+    "rules": {
+			"space-before-function-paren": [
+				"error",
+				{
+					"anonymous": "ignore",
+					"named": "ignore",
+					"asyncArrow": "ignore"
+				}
+			]
+		},
     "parserOptions": {
       "parser": "babel-eslint"
     }

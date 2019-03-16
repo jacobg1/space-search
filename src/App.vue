@@ -1,24 +1,24 @@
 <template>
   <div id="app">
     <vue-particles
-       color="#ffffff"
-        :particleOpacity="1"
-        :particlesNumber="355"
-        shapeType="circle"
-        :particleSize="2"
-        linesColor="#17182f"
-        :linesWidth="1"
-        :lineLinked="false"
-        :lineOpacity="0"
-        :linesDistance="150"
-        :moveSpeed=".5"
-        :hoverEffect="true"
-        hoverMode="grab"
-        :clickEffect="true"
-        clickMode="push"
+      color="#ffffff"
+      :particleOpacity="1"
+      :particlesNumber="355"
+      shapeType="circle"
+      :particleSize="2"
+      linesColor="#17182f"
+      :linesWidth="1"
+      :lineLinked="false"
+      :lineOpacity="0"
+      :linesDistance="150"
+      :moveSpeed="0.5"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
     >
     </vue-particles>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -38,7 +38,7 @@
 
 body,
 html {
-  height: 100%
+  height: 100%;
 }
 
 #particles-js canvas {
@@ -48,8 +48,8 @@ html {
   -ms-transform: scale(1);
   transform: scale(1);
   opacity: 1;
-  -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
-  transition: opacity .8s ease, transform 1.4s ease
+  -webkit-transition: opacity 0.8s ease, -webkit-transform 1.4s ease;
+  transition: opacity 0.8s ease, transform 1.4s ease;
 }
 
 #particles-js {
@@ -89,7 +89,7 @@ html {
 }
 
 .shutter-button:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: -1;
   top: 0;
@@ -153,5 +153,5 @@ button {
   img {
     width: 80% !important;
   }
-   }
+}
 </style>

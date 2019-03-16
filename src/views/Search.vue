@@ -36,9 +36,8 @@
               </div>
           </WaterfallItem>
         </Waterfall>
-
-        <div id="list" v-if="isList" v-for="(result, index) in results" :key="index">
-
+				<div v-if="isList">
+        <div id="list"  v-for="(result, index) in results" :key="index">
             <div v-if="result" class="list-container">
 
               <h2 v-if="result.title">{{ result.title }}</h2>
@@ -65,6 +64,7 @@
               </lightbox>
             </div>
         </div>
+</div>
     </div>
 </template>
 

@@ -1,8 +1,8 @@
 # space-search
 
 [![Build Status](https://travis-ci.org/jacobg1/SpaceSearch.svg?branch=master)](https://travis-ci.org/jacobg1/SpaceSearch.svg?branch=master)
-[![dependencies Status](https://david-dm.org/jacobg1/SpaceSearch/status.svg)](https://david-dm.org/jacobg1/SpaceSearch)
-[![devDependencies Status](https://david-dm.org/jacobg1/SpaceSearch/dev-status.svg)](https://david-dm.org/jacobg1/SpaceSearch?type=dev)
+[![dependencies Status](https://david-dm.org/jacobg1/space-search/status.svg)](https://david-dm.org/jacobg1/space-search)
+[![devDependencies Status](https://david-dm.org/jacobg1/space-search/dev-status.svg)](https://david-dm.org/jacobg1/space-search?type=dev)
 
 A search UI that pulls photos from NASA's image API. Users input search terms into the search bar and results are displayed below. Includes two different views, grid and list.
 

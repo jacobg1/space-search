@@ -1,6 +1,6 @@
 # space-search
 
-[![Build Status](https://travis-ci.org/jacobg1/SpaceSearch.svg?branch=master)](https://travis-ci.org/jacobg1/SpaceSearch.svg?branch=master)
+[![Build Status](https://travis-ci.org/jacobg1/space-search.svg?branch=master)](https://travis-ci.org/jacobg1/space-search)
 [![dependencies Status](https://david-dm.org/jacobg1/space-search/status.svg)](https://david-dm.org/jacobg1/space-search)
 [![devDependencies Status](https://david-dm.org/jacobg1/space-search/dev-status.svg)](https://david-dm.org/jacobg1/space-search?type=dev)
 

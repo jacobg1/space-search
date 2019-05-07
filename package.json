@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.6.10",
-    "vue-pure-lightbox": "^2.1.8",
+    "vue-pure-lightbox": "^2.1.9",
     "vue-router": "^3.0.6",
     "vue2-waterfall": "^2.0.1"
   },

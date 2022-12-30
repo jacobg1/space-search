@@ -19,13 +19,13 @@
       >
         <h2 v-if="result.title">{{ result.title }}</h2>
         <div v-if="result.href" class="grid-lightbox-holder">
-          <lightbox
+          <VuePureLightbox
             :thumbnail="result.href"
             :images="[result.href]"
             :alt="result.title"
           >
-            <lightbox-default-loader slot="loader"></lightbox-default-loader>
-          </lightbox>
+            <!-- <lightbox-default-loader slot="loader"></lightbox-default-loader> -->
+          </VuePureLightbox>
         </div>
 
         <p class="description" v-if="result.description_508">
@@ -56,12 +56,12 @@
         </div>
 
         <div v-if="result.href" class="list-image-container">
-          <lightbox
+          <VuePureLightbox
             :thumbnail="result.href"
             :images="[result.href]"
             :alt="result.title"
           >
-          </lightbox>
+          </VuePureLightbox>
         </div>
       </div>
     </div>
@@ -69,9 +69,10 @@
 </template>
 
 <script>
-import SearchForm from '@/components/SearchForm.vue'
+import SearchForm from '@/components/SearchForm'
 import SwitchView from '@/components/SwitchView'
 import { Waterfall, WaterfallItem } from 'vue2-waterfall'
+import VuePureLightbox from 'vue-pure-lightbox'
 
 export default {
   // name of component, this is the parent component
@@ -81,6 +82,7 @@ export default {
   components: {
     'search-form': SearchForm,
     'switch-view': SwitchView,
+    VuePureLightbox,
 
     // pull in waterfall components
     Waterfall,

@@ -85,6 +85,7 @@ export default defineComponent({
   }
   .title {
     color: #82ceff;
+    margin-bottom: 75px;
   }
 }
 

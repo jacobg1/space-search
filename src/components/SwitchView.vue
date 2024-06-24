@@ -31,6 +31,10 @@ export default defineComponent({
 
 <style lang="scss">
 .switch-view {
-  padding-top: 32px;
+  padding-top: 0;
+
+  @media (max-width: 445px) {
+    padding-top: 32px;
+  }
 }
 </style>

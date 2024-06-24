@@ -1,7 +1,7 @@
 <template>
+  <p class="form-error" v-if="noTerm && !searchTerm">Please enter search term in input field</p>
+  <p class="form-error" v-if="!noTerm && resultLength === 0">No results please try again</p>
   <div class="search-form">
-    <p class="form-error" v-if="noTerm">Please enter search term in input field</p>
-    <p class="form-error" v-if="!noTerm && resultLength === 0">No results please try again</p>
     <form @submit.prevent>
       <input type="text" v-model="searchTerm" placeholder="Enter search" />
       <button
@@ -118,9 +118,13 @@ export default defineComponent({
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
   }
-  .form-error {
-    color: #e3c4ff;
-    margin: 10px 0 0 0;
-  }
+}
+.form-error {
+  position: absolute;
+  top: 105px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #e3c4ff;
 }
 </style>

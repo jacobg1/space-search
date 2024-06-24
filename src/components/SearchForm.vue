@@ -1,15 +1,11 @@
 <template>
   <div class="search-form">
-    <p class="form-error" v-if="noTerm && resultLength !== 0">
-      Please enter search term in input field
-    </p>
-    <p class="form-error" v-if="resultLength === 0">
-      No results please try again
-    </p>
-
+    <p class="form-error" v-if="noTerm">Please enter search term in input field</p>
+    <p class="form-error" v-if="!noTerm && resultLength === 0">No results please try again</p>
     <form @submit.prevent>
       <input type="text" v-model="searchTerm" placeholder="Enter search" />
       <button
+        :disabled="loading"
         class="shutter-button no-active"
         type="submit"
         @click="getSearch(searchTerm)"
@@ -20,71 +16,53 @@
   </div>
 </template>
 
-<script>
-import { GlobalEventStore } from '../services/spaceSearch'
+<script lang="ts">
+import { inject, defineComponent } from 'vue'
 
-export default {
-  // name of component, this is the child component
+import type { SearchResult, SpaceSearch, SearchFormProps } from '@/types/search'
+
+export default defineComponent({
   name: 'SearchForm',
-
-  // need this in order to pass down a function as props
   props: {
     makeSearch: Function
   },
 
+  setup() {
+    const getSpaceSearch: SpaceSearch = inject('getSpaceSearch')
+    return { getSpaceSearch }
+  },
+
   data() {
-    // create variable to hold the search term
-    // this will be passed up to parent component in makeSearch callback
     return {
-      // variable to hold search form input
       searchTerm: '',
-
-      // variable to hold result length
-      resultLength: '',
-
-      // boolean switch for no search term
-      noTerm: false
-    }
+      resultLength: null,
+      noTerm: false,
+      loading: false
+    } as SearchFormProps
   },
   methods: {
-    getSearch(searchTerm) {
-      // reset noTerm
+    async getSearch(searchTerm: string) {
       this.noTerm = false
 
-      // reset resultLength
-      this.resultLength = ''
+      if (searchTerm && this.getSpaceSearch && this.makeSearch) {
+        this.loading = true
 
-      // only fire if search term is not null
-      if (searchTerm) {
-        // make the search with search term
-        let results = this.$getSpaceSearch(searchTerm)
+        const results: SearchResult[] = await this.getSpaceSearch(searchTerm)
 
-        // send results to search view
+        this.loading = false
+
+        this.resultLength = results.length
+
         this.makeSearch(results)
-
-        // listen for check length event and call checkLength
-        GlobalEventStore.$on('check-length', this.checkLength)
       } else {
-        // if no search term set noTerm to true
         this.noTerm = true
-      }
-    },
-
-    // check result length
-    checkLength(length) {
-      // stop listening to event until another search is made
-      GlobalEventStore.$off('check-length')
-
-      // if searchterm, store length in result length
-      if (!this.noTerm) {
-        this.resultLength = length
       }
     }
   }
-}
+})
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .search-form {
   input {
     width: 191px;
@@ -142,16 +120,7 @@ export default {
   }
   .form-error {
     color: #e3c4ff;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 79px;
-    margin-left: auto;
-    margin-right: auto;
-
-    @media (min-width: 440px) {
-      top: 104px;
-    }
+    margin: 10px 0 0 0;
   }
 }
 </style>

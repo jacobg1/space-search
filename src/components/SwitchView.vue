@@ -3,34 +3,33 @@
     <button
       v-bind:class="{ active: listActive }"
       class="shutter-button new-background"
-      @click="makeSwitch(true)"
+      @click="makeSwitch && makeSwitch(true)"
     >
       List
     </button>
     <button
       v-bind:class="{ active: !listActive }"
       class="shutter-button"
-      @click="makeSwitch(false)"
+      @click="makeSwitch && makeSwitch(false)"
     >
       Grid
     </button>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'SwitchView',
   props: {
-    // passed down from Search component
     makeSwitch: Function,
-
-    // gives corresponding button active state
     listActive: Boolean
   }
-}
+})
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .switch-view {
   padding-top: 32px;
 }

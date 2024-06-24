@@ -1,24 +1,49 @@
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+</script>
+
 <template>
-  <div id="app">
+  <div id="app-container">
     <vue-particles
-      color="#ffffff"
-      :particleOpacity="1"
-      :particlesNumber="355"
-      shapeType="circle"
-      :particleSize="2"
-      linesColor="#17182f"
-      :linesWidth="1"
-      :lineLinked="false"
-      :lineOpacity="0"
-      :linesDistance="150"
-      :moveSpeed="0.5"
-      :hoverEffect="true"
-      hoverMode="grab"
-      :clickEffect="true"
-      clickMode="push"
+      id="particles-js"
+      :options="{
+        background: {
+          color: {
+            value: '#17182f'
+          }
+        },
+        particles: {
+          color: {
+            value: '#ffffff'
+          },
+          move: {
+            direction: 'none',
+            enable: true,
+            random: true,
+            speed: 0.3,
+            straight: false
+          },
+          number: {
+            density: {
+              enable: true
+            },
+            value: 800
+          },
+          opacity: {
+            value: 1
+          },
+          shape: {
+            type: 'circle'
+          },
+          size: {
+            value: { min: 0.5, max: 2 }
+          }
+        },
+        detectRetina: true
+      }"
     >
     </vue-particles>
-    <router-view />
+    <RouterView />
   </div>
 </template>
 
@@ -28,28 +53,22 @@
   display: inline-block;
 }
 
-#app {
+#app-container {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  padding-bottom: 100px;
+}
+
+body {
+  overflow-y: auto;
 }
 
 body,
 html {
   height: 100%;
-}
-
-#particles-js canvas {
-  display: block;
-  vertical-align: bottom;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-  opacity: 1;
-  -webkit-transition: opacity 0.8s ease, -webkit-transform 1.4s ease;
-  transition: opacity 0.8s ease, transform 1.4s ease;
 }
 
 #particles-js {

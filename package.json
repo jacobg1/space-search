@@ -1,65 +1,41 @@
 {
   "name": "space-search",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint",
-    "format": "prettier --write \"**/*.js\" && prettier --write \"**/*.vue\""
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "vue": "^2.6.10",
-    "vue-pure-lightbox": "^3.1.0",
-    "vue-router": "^3.0.6",
-    "vue2-waterfall": "^2.0.1"
+    "@tsparticles/vue3": "^3.0.1",
+    "axios": "^1.7.2",
+    "tsparticles": "^3.4.0",
+    "vue": "^3.4.29",
+    "vue-router": "^4.3.3",
+    "vue-silentbox": "^3.0.4"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.7.0",
-    "@vue/cli-plugin-eslint": "^3.7.0",
-    "@vue/cli-service": "^3.7.0",
-    "@vue/eslint-config-standard": "^4.0.0",
-    "node-sass": "^4.14.1",
-    "prettier": "^1.17.0",
-    "sass-loader": "^7.0.1",
-    "vue-particles": "^1.0.9",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jacobg1/SpaceSearch"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "rules": {
-      "space-before-function-paren": [
-        "error",
-        {
-          "anonymous": "ignore",
-          "named": "ignore",
-          "asyncArrow": "ignore"
-        }
-      ]
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.14.5",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "npm-run-all2": "^6.2.0",
+    "prettier": "^3.2.5",
+    "sass": "^1.77.6",
+    "typescript": "~5.4.0",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.21"
+  }
 }

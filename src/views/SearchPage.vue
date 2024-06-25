@@ -5,29 +5,51 @@
     <SearchForm :makeSearch="handleSearch" />
     <SwitchView :listActive="isList" :makeSwitch="handleSwitch" />
 
+    <div v-if="!isList">
+      <masonry-wall :items="results" :max-columns="6" :column-width="290" :gap="20">
+        <template v-if="results" #default="{ item }: any">
+          <div class="gallery-item">
+            <h2 v-if="item.title">{{ item.title }}</h2>
+            <div v-if="item.href" class="grid-lightbox-holder">
+              <silent-box
+                :image="{
+                  src: item.href,
+                  description: item.title?.toLowerCase(),
+                  thumbnail: item.href,
+                  alt: item.title
+                }"
+              ></silent-box>
+            </div>
+            <p
+              class="description"
+              v-if="item.description_508 && item.description_508 !== item.title"
+            >
+              {{ item.description_508.toLowerCase() }}
+            </p>
+            <div v-if="item.keywords" class="keyword-holder">
+              <p class="keyword-title">Keywords:</p>
+              <p class="grid-keywords">{{ item.keywords }}</p>
+            </div>
+          </div>
+        </template>
+      </masonry-wall>
+    </div>
+
     <div v-if="isList">
       <div id="list" v-for="(result, index) in results" :key="index">
         <div v-if="result" class="list-container">
           <h2 v-if="result.title">{{ result.title }}</h2>
-
-          <p class="description" v-if="result.description && result.description !== result.title">
-            {{ result.description.toLowerCase() }}
-            {{ result.description !== result.title }}
-          </p>
-
           <p
             class="description"
             v-if="result.description_508 && result.description_508 !== result.title"
           >
             {{ result.description_508.toLowerCase() }}
           </p>
-
           <div class="keyword-holder" v-if="result.keywords">
             <p class="keyword-title">Keywords:</p>
             <p>{{ result.keywords }}</p>
           </div>
         </div>
-
         <div v-if="result.href" class="list-image-container">
           <div height="100%" width="100%">
             <silent-box
@@ -48,6 +70,7 @@
 <script lang="ts">
 import SearchForm from '../components/SearchForm.vue'
 import SwitchView from '../components/SwitchView.vue'
+import MasonryWall from '@yeger/vue-masonry-wall'
 import type { SearchResult, SearchPageProps } from '@/types/search'
 import { defineComponent } from 'vue'
 
@@ -56,7 +79,8 @@ export default defineComponent({
 
   components: {
     SearchForm,
-    SwitchView
+    SwitchView,
+    MasonryWall
   },
 
   data() {
@@ -103,11 +127,16 @@ export default defineComponent({
   }
 }
 
-.waterfall {
+.gallery-container {
   padding-top: 22px;
 }
 
-.waterfall-item {
+.masonry-item {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery-item {
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.22);
@@ -145,12 +174,22 @@ export default defineComponent({
 
   .description {
     color: #e3c4ff;
+    overflow-wrap: break-word;
   }
 }
 
 .grid-lightbox-holder {
-  max-width: 265px;
+  max-width: 90%;
   margin: 0 auto;
+
+  @media (max-width: 635px) {
+    margin: auto;
+    max-width: 370px;
+  }
+
+  img {
+    width: 100%;
+  }
 }
 
 #list {
@@ -203,6 +242,7 @@ export default defineComponent({
   .description {
     color: #e3c4ff;
     font-weight: bold;
+    overflow-wrap: break-word;
   }
 
   .list-image-container {

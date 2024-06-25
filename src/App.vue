@@ -62,6 +62,10 @@ import { RouterView } from 'vue-router'
   padding-bottom: 100px;
 }
 
+#space-search {
+  overflow: auto;
+}
+
 body {
   overflow-y: auto;
 }

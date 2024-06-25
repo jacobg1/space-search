@@ -5,7 +5,7 @@
     <SearchForm :makeSearch="handleSearch" />
     <SwitchView :listActive="isList" :makeSwitch="handleSwitch" />
 
-    <div v-if="!isList">
+    <div v-if="!isList" class="gallery">
       <masonry-wall :items="results" :max-columns="6" :column-width="290" :gap="20">
         <template v-if="results" #default="{ item }: any">
           <div class="gallery-item">
@@ -125,6 +125,10 @@ export default defineComponent({
     width: 191px;
     background-color: none;
   }
+}
+
+.gallery {
+  padding-top: 20px;
 }
 
 .gallery-container {

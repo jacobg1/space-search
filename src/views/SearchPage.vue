@@ -102,6 +102,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+#silentbox-overlay__container {
+	max-width: 600px;
+  margin: 0 auto;
+}
 .search {
   h2 {
     color: #e3c4ff;

@@ -75,6 +75,10 @@ html {
   height: 100%;
 }
 
+button:disabled {
+  pointer-events: none;
+}
+
 #particles-js {
   width: 100%;
   height: 100%;

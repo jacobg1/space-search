@@ -1,3 +1,5 @@
+import type { PaginationLink } from './pagination'
+
 interface SearchResult {
   href: string
   rel: string
@@ -14,15 +16,9 @@ interface SearchResult {
   description_508: string
 }
 
-interface PaginationLinks {
-  rel: string
-  prompt: string
-  href: string
-}
-
 export interface SearchResponse {
   items: SearchResult[]
-  paginationLinks: PaginationLinks[]
+  paginationLinks: PaginationLink[]
 }
 
 export interface SearchFormProps {
@@ -32,11 +28,13 @@ export interface SearchFormProps {
   noTerm: boolean
 }
 
-export type SpaceSearch = ((searchTerm: string) => Promise<SearchResponse>) | undefined
+export type SpaceSearch =
+  | ((searchTerm: string, page?: string) => Promise<SearchResponse>)
+  | undefined
 
 export interface SearchPageProps {
   results: SearchResult[]
-  paginationLinks: PaginationLinks[]
+  paginationLinks: PaginationLink[]
   keywords: null
   isList: boolean
 }

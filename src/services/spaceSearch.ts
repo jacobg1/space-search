@@ -8,11 +8,12 @@ const API_URL = 'https://03pzs8yfhl.execute-api.us-east-1.amazonaws.com/prod/sea
 
 export default {
   install: (app: any) => {
-    const getSpaceSearch = async (term: string): Promise<SearchResponse> => {
+    const getSpaceSearch = async (term: string, page: string): Promise<SearchResponse> => {
+      const pagination = page ? `?page=${page}` : ''
       try {
         const response = await axios<SearchResponse>({
           method: 'GET',
-          url: `${API_URL}/${term}`,
+          url: `${API_URL}/${term}${pagination}`,
           headers: {
             'Content-Type': 'application/json'
           }

@@ -64,12 +64,14 @@
         </div>
       </div>
     </div>
+    <SwitchPage :makeSearch="handleSearch" :paginationLinks="paginationLinks" />
   </div>
 </template>
 
 <script lang="ts">
 import SearchForm from '../components/SearchForm.vue'
 import SwitchView from '../components/SwitchView.vue'
+import SwitchPage from '../components/SwitchPage.vue'
 import MasonryWall from '@yeger/vue-masonry-wall'
 import type { SearchResponse, SearchPageProps } from '@/types/search'
 import { defineComponent } from 'vue'
@@ -80,13 +82,14 @@ export default defineComponent({
   components: {
     SearchForm,
     SwitchView,
+    SwitchPage,
     MasonryWall
   },
 
   data() {
     return {
       results: [],
-			paginationLinks: [],
+      paginationLinks: [],
       keywords: null,
       isList: false
     } as SearchPageProps
@@ -94,7 +97,7 @@ export default defineComponent({
   methods: {
     handleSearch(results: SearchResponse) {
       this.results = results.items
-			this.paginationLinks = results.paginationLinks
+      this.paginationLinks = results.paginationLinks
     },
     handleSwitch(switchView: boolean) {
       this.isList = switchView
@@ -105,7 +108,7 @@ export default defineComponent({
 
 <style lang="scss">
 #silentbox-overlay__container {
-	max-width: 600px;
+  max-width: 600px;
   margin: 0 auto;
 }
 .search {

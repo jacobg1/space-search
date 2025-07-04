@@ -1,4 +1,4 @@
-export interface SearchResult {
+interface SearchResult {
   href: string
   rel: string
   render: string
@@ -14,6 +14,17 @@ export interface SearchResult {
   description_508: string
 }
 
+interface PaginationLinks {
+  rel: string
+  prompt: string
+  href: string
+}
+
+export interface SearchResponse {
+  items: SearchResult[]
+  paginationLinks: PaginationLinks[]
+}
+
 export interface SearchFormProps {
   searchTerm: string
   resultLength: number | null
@@ -21,10 +32,11 @@ export interface SearchFormProps {
   noTerm: boolean
 }
 
-export type SpaceSearch = ((searchTerm: string) => Promise<SearchResult[]>) | undefined
+export type SpaceSearch = ((searchTerm: string) => Promise<SearchResponse>) | undefined
 
 export interface SearchPageProps {
   results: SearchResult[]
+  paginationLinks: PaginationLinks[]
   keywords: null
   isList: boolean
 }

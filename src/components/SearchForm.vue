@@ -19,7 +19,7 @@
 <script lang="ts">
 import { inject, defineComponent } from 'vue'
 
-import type { SearchResult, SpaceSearch, SearchFormProps } from '@/types/search'
+import type { SpaceSearch, SearchFormProps, SearchResponse } from '@/types/search'
 
 export default defineComponent({
   name: 'SearchForm',
@@ -47,11 +47,11 @@ export default defineComponent({
       if (searchTerm && this.getSpaceSearch && this.makeSearch) {
         this.loading = true
 
-        const results: SearchResult[] = await this.getSpaceSearch(searchTerm)
+        const results: SearchResponse = await this.getSpaceSearch(searchTerm)
 
         this.loading = false
 
-        this.resultLength = results.length
+        this.resultLength = results?.items?.length || 0
 
         this.makeSearch(results)
       } else {

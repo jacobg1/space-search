@@ -71,7 +71,7 @@
 import SearchForm from '../components/SearchForm.vue'
 import SwitchView from '../components/SwitchView.vue'
 import MasonryWall from '@yeger/vue-masonry-wall'
-import type { SearchResult, SearchPageProps } from '@/types/search'
+import type { SearchResponse, SearchPageProps } from '@/types/search'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -86,13 +86,15 @@ export default defineComponent({
   data() {
     return {
       results: [],
+			paginationLinks: [],
       keywords: null,
       isList: false
     } as SearchPageProps
   },
   methods: {
-    handleSearch(results: SearchResult[]) {
-      this.results = results
+    handleSearch(results: SearchResponse) {
+      this.results = results.items
+			this.paginationLinks = results.paginationLinks
     },
     handleSwitch(switchView: boolean) {
       this.isList = switchView

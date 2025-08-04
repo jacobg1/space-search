@@ -8,7 +8,7 @@
   </div>
 	<ShutterButton
 		:loading="loading"
-		class="no-active"
+		class="search-button"
 		type="submit"
 		@click="getSearch(searchTerm)"
 	>

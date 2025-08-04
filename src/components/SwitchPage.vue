@@ -5,7 +5,7 @@
 				<ShutterButton
 					v-if="prevLink"
 					:loading="loading"
-					class="new-background"
+					class="secondary-button"
           @click="() => getSearch(prevLink)"
 				>
 					Prev

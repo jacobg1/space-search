@@ -2,7 +2,7 @@
   <div class="switch-view">
 		<ShutterButton
 			v-bind:class="{ active: listActive }"
-			class="new-background"
+			class="secondary-button"
 			@click="makeSwitch && makeSwitch(true)"
 		>
 			List

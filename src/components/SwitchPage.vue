@@ -2,24 +2,23 @@
   <div v-if="paginationLinks?.length" class="switch-page-container">
     <div class="switch-page">
       <div>
-        <button
-          v-if="prevLink"
+				<ShutterButton
+					v-if="prevLink"
+					:loading="loading"
+					class="new-background"
           @click="() => getSearch(prevLink)"
-          :disabled="loading"
-          class="shutter-button new-background"
-        >
-          Prev
-        </button>
+				>
+					Prev
+				</ShutterButton>
       </div>
       <div>
-        <button
-          v-if="nextLink"
+				<ShutterButton
+					v-if="nextLink"
+					:loading="loading"
           @click="() => getSearch(nextLink)"
-          :disabled="loading"
-          class="shutter-button"
-        >
-          Next
-        </button>
+				>
+					Next
+				</ShutterButton>
       </div>
     </div>
   </div>
@@ -33,6 +32,7 @@ import type { PaginationLink } from '@/types/pagination'
 
 import { getPaginationLink } from '@/utils/getPaginationLinks'
 import { PaginationDirection } from '@/enum'
+import ShutterButton from './ShutterButton.vue'
 
 export default defineComponent({
   name: 'SwitchPage',
@@ -40,6 +40,10 @@ export default defineComponent({
     makeSearch: Function,
     paginationLinks: Array as PropType<PaginationLink[]>
   },
+
+	components: {
+		ShutterButton
+	},
 
   setup(props) {
     const loading = ref(false)

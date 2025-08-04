@@ -1,60 +1,64 @@
 <template>
-	<button
-		v-if="!loading"
-		v-bind:class="{
-			loading,
-			active: active || false
-		}"
-		:disabled="loading || disabled || false"
-		:type="type || 'button'"
-		:class="['shutter-button', className]"
-		@click="onClick"
-	>
-		<slot></slot>
-	</button>
-	<div v-if="loading" class="loading-container">
-		<div class="loading-spinner" />
-	</div>
+  <button
+    v-if="!loading"
+    v-bind:class="{
+      loading,
+      active: active || false
+    }"
+    :disabled="loading || disabled || false"
+    :type="type || 'button'"
+    :class="['shutter-button', className]"
+    @click="onClick"
+  >
+    <slot></slot>
+  </button>
+  <div v-if="loading" class="loading-container">
+    <div class="loading-spinner" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { ButtonHTMLAttributes } from 'vue';
+import type { ButtonHTMLAttributes } from 'vue'
 
-type OnClickType = (payload: MouseEvent) => (void | Promise<void>)
+type OnClickType = (payload: MouseEvent) => void | Promise<void>
 
 defineProps<{
-	active?: boolean
-	loading?: boolean,
-	disabled?: boolean,
-	className?: string,
-	type?: ButtonHTMLAttributes["type"],
-	onClick: OnClickType
+  active?: boolean
+  loading?: boolean
+  disabled?: boolean
+  className?: string
+  type?: ButtonHTMLAttributes['type']
+  onClick: OnClickType
 }>()
 </script>
 
 <style lang="scss">
 .loading-container {
-	border: 1px solid #ffffff;
+  border: 1px solid #ffffff;
   background-color: #17182f;
-	display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-	margin: 0.1em 0.3em;
+  margin: 0.1em 0.3em;
 }
 
 .loading-spinner {
-	border: 2px solid #ffffff;
-	border-top: 2px solid #82ceff;
-	border-radius: 50%;
-	width: 16px;
-	height: 16px;
-	animation: spin 2s linear infinite;
-	margin: 0;
+  border: 2px solid #ffffff;
+  border-top: 2px solid #82ceff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 2s linear infinite;
+  margin: 0;
 }
 
 @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .shutter-button {
@@ -65,7 +69,7 @@ defineProps<{
   background: transparent;
   transition-property: color;
   transition-duration: 0.3s;
-	padding-right: 14px;
+  padding-right: 14px;
 }
 
 .shutter-button:before {
@@ -99,14 +103,14 @@ defineProps<{
 }
 
 .search-button:before {
-	background: #f39294
+  background: #f39294;
 }
 
 .search-button:hover {
-	color: #17182f;
+  color: #17182f;
 }
 
 .search-button:hover:before {
-	transform: scaleY(1);
+  transform: scaleY(1);
 }
 </style>

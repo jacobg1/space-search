@@ -1,24 +1,24 @@
 <template>
   <div class="switch-view">
-		<ShutterButton
-			className="secondary-button"
-			:active="listActive"
-			:onClick="() => makeSwitch && makeSwitch(true)"
-		>
-			List
-		</ShutterButton>
-		<ShutterButton
-			:active="!listActive"
-			:onClick="() => makeSwitch && makeSwitch(false)"
-		>
-			Grid
-		</ShutterButton>
+    <ShutterButton
+      className="secondary-button"
+      :active="listActive"
+      :onClick="() => makeSwitch && makeSwitch(true)"
+    >
+      List
+    </ShutterButton>
+    <ShutterButton
+      :active="!listActive"
+      :onClick="() => makeSwitch && makeSwitch(false)"
+    >
+      Grid
+    </ShutterButton>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import ShutterButton from './ShutterButton.vue';
+import ShutterButton from './ShutterButton.vue'
 
 export default defineComponent({
   name: 'SwitchView',
@@ -27,9 +27,9 @@ export default defineComponent({
     listActive: Boolean
   },
 
-	components: {
-		ShutterButton
-	}
+  components: {
+    ShutterButton
+  }
 })
 </script>
 

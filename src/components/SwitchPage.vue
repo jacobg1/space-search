@@ -2,25 +2,25 @@
   <div v-if="paginationLinks?.length" class="switch-page-container">
     <div class="switch-page">
       <div>
-				<ShutterButton
-					v-if="prevLink"
-					className="secondary-button"
-					:loading="prevLoading"
-					:disabled="prevLoading || nextLoading"
+        <ShutterButton
+          v-if="prevLink"
+          className="secondary-button"
+          :loading="prevLoading"
+          :disabled="prevLoading || nextLoading"
           :onClick="() => getSearch(prevLink, PREV)"
-				>
-					Prev
-				</ShutterButton>
+        >
+          Prev
+        </ShutterButton>
       </div>
       <div>
-				<ShutterButton
-					v-if="nextLink"
-					:loading="nextLoading"
-					:disabled="nextLoading || prevLoading"
+        <ShutterButton
+          v-if="nextLink"
+          :loading="nextLoading"
+          :disabled="nextLoading || prevLoading"
           :onClick="() => getSearch(nextLink, NEXT)"
-				>
-					Next
-				</ShutterButton>
+        >
+          Next
+        </ShutterButton>
       </div>
     </div>
   </div>
@@ -43,55 +43,49 @@ export default defineComponent({
     paginationLinks: Array as PropType<PaginationLink[]>
   },
 
-	components: {
-		ShutterButton
-	},
+  components: {
+    ShutterButton
+  },
 
   setup(props) {
-		const { NEXT, PREV } = PaginationDirection;
+    const { NEXT, PREV } = PaginationDirection
 
-		const nextLoading = ref(false)
-		const prevLoading = ref(false)
+    const nextLoading = ref(false)
+    const prevLoading = ref(false)
 
     const getSpaceSearch: SpaceSearch = inject('getSpaceSearch')
 
     const prevLink = computed<PaginationLink | null>(() => {
-			return getPaginationLink(
-				PREV,
-				props.paginationLinks
-			)
-		})
+      return getPaginationLink(PREV, props.paginationLinks)
+    })
 
     const nextLink = computed<PaginationLink | null>(() => {
-			return getPaginationLink(
-				NEXT,
-				props.paginationLinks
-			)
-		})
+      return getPaginationLink(NEXT, props.paginationLinks)
+    })
 
     return {
-			getSpaceSearch,
-			nextLoading,
-			prevLoading,
-			prevLink,
-			nextLink,
-			NEXT,
-			PREV
-		}
+      getSpaceSearch,
+      nextLoading,
+      prevLoading,
+      prevLink,
+      nextLink,
+      NEXT,
+      PREV
+    }
   },
   methods: {
-    async getSearch(
-			link: PaginationLink | null,
-			direction: PaginationDirection
-		) {
+    async getSearch(link: PaginationLink | null, direction: PaginationDirection) {
       if (link && this.getSpaceSearch && this.makeSearch) {
-				if (direction === this.NEXT) this.nextLoading = true
-				if (direction === this.PREV) this.prevLoading = true
+        if (direction === this.NEXT) this.nextLoading = true
+        if (direction === this.PREV) this.prevLoading = true
 
-        const results: SearchResponse = await this.getSpaceSearch(link.searchTerm, link.page)
+        const results: SearchResponse = await this.getSpaceSearch(
+          link.searchTerm,
+          link.page
+        )
 
-				this.nextLoading = false
-				this.prevLoading = false
+        this.nextLoading = false
+        this.prevLoading = false
 
         window.scrollTo(0, 0)
 
@@ -114,8 +108,8 @@ export default defineComponent({
     max-width: 80%;
   }
 
-	.loading-container {
-		padding: 11px 18.455px;
-	}
+  .loading-container {
+    padding: 11px 18.455px;
+  }
 }
 </style>

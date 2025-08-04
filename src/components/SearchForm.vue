@@ -1,24 +1,28 @@
 <template>
-  <p class="form-error" v-if="noTerm && !searchTerm">Please enter search term in input field</p>
-  <p class="form-error" v-if="!noTerm && resultLength === 0">No results please try again</p>
+  <p class="form-error" v-if="noTerm && !searchTerm">
+    Please enter search term in input field
+  </p>
+  <p class="form-error" v-if="!noTerm && resultLength === 0">
+    No results please try again
+  </p>
   <div class="search-form">
     <form @submit.prevent>
       <input
-				id="form-input" 
-				type="text"
-				placeholder="Enter search"
-				autocomplete="off"
-				v-model="searchTerm"
-			/>
+        id="form-input"
+        type="text"
+        placeholder="Enter search"
+        autocomplete="off"
+        v-model="searchTerm"
+      />
     </form>
-		<ShutterButton
-			className="search-button"
-			type="submit"
-			:loading="loading"
-			:onClick="() => getSearch(searchTerm)"
-		>
-			Go!
-		</ShutterButton>
+    <ShutterButton
+      className="search-button"
+      type="submit"
+      :loading="loading"
+      :onClick="() => getSearch(searchTerm)"
+    >
+      Go!
+    </ShutterButton>
   </div>
 </template>
 
@@ -34,9 +38,9 @@ export default defineComponent({
     makeSearch: Function
   },
 
-	components: {
-		ShutterButton
-	},
+  components: {
+    ShutterButton
+  },
 
   setup() {
     const getSpaceSearch: SpaceSearch = inject('getSpaceSearch')
@@ -75,10 +79,10 @@ export default defineComponent({
 
 <style lang="scss">
 .search-form {
-	display: inline-flex;
-	.loading-container {
-		padding: 0 14.455px;
-	}
+  display: inline-flex;
+  .loading-container {
+    padding: 0 14.455px;
+  }
   input {
     width: 191px;
     background-color: #17182f;

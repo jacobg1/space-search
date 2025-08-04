@@ -1,23 +1,61 @@
 <template>
 	<button
+		v-if="!loading"
+		v-bind:class="{
+			loading,
+			active: active || false
+		}"
 		:disabled="loading || false"
 		:type="type || 'button'"
-		class="shutter-button"
+		:class="['shutter-button', className]"
+		@click="onClick"
 	>
 		<slot></slot>
 	</button>
+	<div v-if="loading" class="loading-container">
+		<div class="loading-spinner" />
+	</div>
 </template>
 
-<script setup lang="ts" generic="T">
+<script setup lang="ts">
 import type { ButtonHTMLAttributes } from 'vue';
 
+type OnClickType = (payload: MouseEvent) => (void | Promise<void>)
+
 defineProps<{
+	active?: boolean
 	loading?: boolean,
+	className?: string,
 	type?: ButtonHTMLAttributes["type"],
+	onClick: OnClickType
 }>()
 </script>
 
 <style lang="scss">
+.loading-container {
+	border: 1px solid #ffffff;
+  background-color: #17182f;
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+	margin: 0.1em 0.3em;
+}
+
+.loading-spinner {
+	border: 2px solid #ffffff;
+	border-top: 2px solid #82ceff;
+	border-radius: 50%;
+	width: 16px;
+	height: 16px;
+	animation: spin 2s linear infinite;
+	margin: 0;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
 .shutter-button {
   display: inline-block;
   transform: perspective(1px) translateZ(0);
@@ -26,6 +64,7 @@ defineProps<{
   background: #17182f;
   transition-property: color;
   transition-duration: 0.3s;
+	padding-right: 14px;
 }
 
 .shutter-button:before {

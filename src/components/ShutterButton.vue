@@ -5,7 +5,7 @@
 			loading,
 			active: active || false
 		}"
-		:disabled="loading || false"
+		:disabled="loading || disabled || false"
 		:type="type || 'button'"
 		:class="['shutter-button', className]"
 		@click="onClick"
@@ -25,6 +25,7 @@ type OnClickType = (payload: MouseEvent) => (void | Promise<void>)
 defineProps<{
 	active?: boolean
 	loading?: boolean,
+	disabled?: boolean,
 	className?: string,
 	type?: ButtonHTMLAttributes["type"],
 	onClick: OnClickType
@@ -61,7 +62,7 @@ defineProps<{
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
   position: relative;
-  background: #17182f;
+  background: transparent;
   transition-property: color;
   transition-duration: 0.3s;
 	padding-right: 14px;

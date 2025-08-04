@@ -14,10 +14,10 @@
     "format": "prettier --write src/"
   },
   "browserslist": [
-   ">1%",
-		"last 4 versions",
-		"Firefox ESR",
-		"ie >= 9"
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "ie >= 9"
   ],
   "dependencies": {
     "@tsparticles/vue3": "^3.0.1",

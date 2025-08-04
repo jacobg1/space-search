@@ -5,8 +5,9 @@
 				<ShutterButton
 					v-if="prevLink"
 					className="secondary-button"
-					:loading="loading"
-          :onClick="() => getSearch(prevLink)"
+					:loading="prevLoading"
+					:disabled="prevLoading || nextLoading"
+          :onClick="() => getSearch(prevLink, PREV)"
 				>
 					Prev
 				</ShutterButton>
@@ -14,8 +15,9 @@
       <div>
 				<ShutterButton
 					v-if="nextLink"
-					:loading="loading"
-          :onClick="() => getSearch(nextLink)"
+					:loading="nextLoading"
+					:disabled="nextLoading || prevLoading"
+          :onClick="() => getSearch(nextLink, NEXT)"
 				>
 					Next
 				</ShutterButton>
@@ -46,26 +48,51 @@ export default defineComponent({
 	},
 
   setup(props) {
-    const loading = ref(false)
+		const { NEXT, PREV } = PaginationDirection;
+
+		const nextLoading = ref(false)
+		const prevLoading = ref(false)
+
     const getSpaceSearch: SpaceSearch = inject('getSpaceSearch')
 
-    const prevLink = computed<PaginationLink | null>(() =>
-      getPaginationLink(PaginationDirection.PREV, props.paginationLinks)
-    )
-    const nextLink = computed<PaginationLink | null>(() =>
-      getPaginationLink(PaginationDirection.NEXT, props.paginationLinks)
-    )
+    const prevLink = computed<PaginationLink | null>(() => {
+			return getPaginationLink(
+				PREV,
+				props.paginationLinks
+			)
+		})
 
-    return { getSpaceSearch, loading, prevLink, nextLink }
+    const nextLink = computed<PaginationLink | null>(() => {
+			return getPaginationLink(
+				NEXT,
+				props.paginationLinks
+			)
+		})
+
+    return {
+			getSpaceSearch,
+			nextLoading,
+			prevLoading,
+			prevLink,
+			nextLink,
+			NEXT,
+			PREV
+		}
   },
   methods: {
-    async getSearch(link: PaginationLink | null) {
+    async getSearch(
+			link: PaginationLink | null,
+			direction: PaginationDirection
+		) {
       if (link && this.getSpaceSearch && this.makeSearch) {
-        this.loading = true
+				if (direction === this.NEXT) this.nextLoading = true
+				if (direction === this.PREV) this.prevLoading = true
 
         const results: SearchResponse = await this.getSpaceSearch(link.searchTerm, link.page)
 
-        this.loading = false
+				this.nextLoading = false
+				this.prevLoading = false
+
         window.scrollTo(0, 0)
 
         this.makeSearch(results)

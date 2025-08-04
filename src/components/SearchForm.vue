@@ -7,6 +7,7 @@
 				id="form-input" 
 				type="text"
 				placeholder="Enter search"
+				autocomplete="off"
 				v-model="searchTerm"
 			/>
     </form>

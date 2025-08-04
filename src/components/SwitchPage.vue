@@ -4,9 +4,9 @@
       <div>
 				<ShutterButton
 					v-if="prevLink"
+					className="secondary-button"
 					:loading="loading"
-					class="secondary-button"
-          @click="() => getSearch(prevLink)"
+          :onClick="() => getSearch(prevLink)"
 				>
 					Prev
 				</ShutterButton>
@@ -15,7 +15,7 @@
 				<ShutterButton
 					v-if="nextLink"
 					:loading="loading"
-          @click="() => getSearch(nextLink)"
+          :onClick="() => getSearch(nextLink)"
 				>
 					Next
 				</ShutterButton>
@@ -86,5 +86,9 @@ export default defineComponent({
   @media (max-width: 445px) {
     max-width: 80%;
   }
+
+	.loading-container {
+		padding: 11px 18.455px;
+	}
 }
 </style>

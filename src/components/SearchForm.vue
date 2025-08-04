@@ -3,17 +3,22 @@
   <p class="form-error" v-if="!noTerm && resultLength === 0">No results please try again</p>
   <div class="search-form">
     <form @submit.prevent>
-      <input type="text" v-model="searchTerm" placeholder="Enter search" />
+      <input
+				id="form-input" 
+				type="text"
+				placeholder="Enter search"
+				v-model="searchTerm"
+			/>
     </form>
+		<ShutterButton
+			className="search-button"
+			type="submit"
+			:loading="loading"
+			:onClick="() => getSearch(searchTerm)"
+		>
+			Go!
+		</ShutterButton>
   </div>
-	<ShutterButton
-		:loading="loading"
-		class="search-button"
-		type="submit"
-		@click="getSearch(searchTerm)"
-	>
-		Go!
-	</ShutterButton>
 </template>
 
 <script lang="ts">
@@ -69,6 +74,10 @@ export default defineComponent({
 
 <style lang="scss">
 .search-form {
+	display: inline-flex;
+	.loading-container {
+		padding: 0 14.455px;
+	}
   input {
     width: 191px;
     background-color: #17182f;

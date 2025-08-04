@@ -1,15 +1,15 @@
 <template>
   <div class="switch-view">
 		<ShutterButton
-			v-bind:class="{ active: listActive }"
-			class="secondary-button"
-			@click="makeSwitch && makeSwitch(true)"
+			className="secondary-button"
+			:active="listActive"
+			:onClick="() => makeSwitch && makeSwitch(true)"
 		>
 			List
 		</ShutterButton>
 		<ShutterButton
-			v-bind:class="{ active: !listActive }"
-			@click="makeSwitch && makeSwitch(false)"
+			:active="!listActive"
+			:onClick="() => makeSwitch && makeSwitch(false)"
 		>
 			Grid
 		</ShutterButton>

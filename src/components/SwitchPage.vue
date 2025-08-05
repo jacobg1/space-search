@@ -2,24 +2,25 @@
   <div v-if="paginationLinks?.length" class="switch-page-container">
     <div class="switch-page">
       <div>
-        <button
+        <ShutterButton
           v-if="prevLink"
-          @click="() => getSearch(prevLink)"
-          :disabled="loading"
-          class="shutter-button new-background"
+          className="secondary-button"
+          :loading="prevLoading"
+          :disabled="prevLoading || nextLoading"
+          :onClick="() => getSearch(prevLink, PREV)"
         >
           Prev
-        </button>
+        </ShutterButton>
       </div>
       <div>
-        <button
+        <ShutterButton
           v-if="nextLink"
-          @click="() => getSearch(nextLink)"
-          :disabled="loading"
-          class="shutter-button"
+          :loading="nextLoading"
+          :disabled="nextLoading || prevLoading"
+          :onClick="() => getSearch(nextLink, NEXT)"
         >
           Next
-        </button>
+        </ShutterButton>
       </div>
     </div>
   </div>
@@ -33,6 +34,7 @@ import type { PaginationLink } from '@/types/pagination'
 
 import { getPaginationLink } from '@/utils/getPaginationLinks'
 import { PaginationDirection } from '@/enum'
+import ShutterButton from './ShutterButton.vue'
 
 export default defineComponent({
   name: 'SwitchPage',
@@ -41,27 +43,50 @@ export default defineComponent({
     paginationLinks: Array as PropType<PaginationLink[]>
   },
 
+  components: {
+    ShutterButton
+  },
+
   setup(props) {
-    const loading = ref(false)
+    const { NEXT, PREV } = PaginationDirection
+
+    const nextLoading = ref(false)
+    const prevLoading = ref(false)
+
     const getSpaceSearch: SpaceSearch = inject('getSpaceSearch')
 
-    const prevLink = computed<PaginationLink | null>(() =>
-      getPaginationLink(PaginationDirection.PREV, props.paginationLinks)
-    )
-    const nextLink = computed<PaginationLink | null>(() =>
-      getPaginationLink(PaginationDirection.NEXT, props.paginationLinks)
-    )
+    const prevLink = computed<PaginationLink | null>(() => {
+      return getPaginationLink(PREV, props.paginationLinks)
+    })
 
-    return { getSpaceSearch, loading, prevLink, nextLink }
+    const nextLink = computed<PaginationLink | null>(() => {
+      return getPaginationLink(NEXT, props.paginationLinks)
+    })
+
+    return {
+      getSpaceSearch,
+      nextLoading,
+      prevLoading,
+      prevLink,
+      nextLink,
+      NEXT,
+      PREV
+    }
   },
   methods: {
-    async getSearch(link: PaginationLink | null) {
+    async getSearch(link: PaginationLink | null, direction: PaginationDirection) {
       if (link && this.getSpaceSearch && this.makeSearch) {
-        this.loading = true
+        if (direction === this.NEXT) this.nextLoading = true
+        if (direction === this.PREV) this.prevLoading = true
 
-        const results: SearchResponse = await this.getSpaceSearch(link.searchTerm, link.page)
+        const results: SearchResponse = await this.getSpaceSearch(
+          link.searchTerm,
+          link.page
+        )
 
-        this.loading = false
+        this.nextLoading = false
+        this.prevLoading = false
+
         window.scrollTo(0, 0)
 
         this.makeSearch(results)
@@ -81,6 +106,10 @@ export default defineComponent({
 
   @media (max-width: 445px) {
     max-width: 80%;
+  }
+
+  .loading-container {
+    padding: 11px 18.455px;
   }
 }
 </style>

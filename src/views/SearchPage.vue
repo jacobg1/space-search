@@ -132,7 +132,7 @@ export default defineComponent({
 .search-form {
   input {
     width: 191px;
-    background-color: none;
+    background-color: transparent;
   }
 }
 

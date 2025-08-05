@@ -7,7 +7,10 @@ const axios = setupCache(instance)
 
 export default {
   install: (app: any) => {
-    const getSpaceSearch = async (term: string, page: string): Promise<SearchResponse> => {
+    const getSpaceSearch = async (
+      term: string,
+      page: string
+    ): Promise<SearchResponse> => {
       const pageNumber = page || 1
       try {
         const response = await axios<SearchResponse>({

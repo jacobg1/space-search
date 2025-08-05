@@ -13,6 +13,12 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
+  "browserslist": [
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "ie >= 9"
+  ],
   "dependencies": {
     "@tsparticles/vue3": "^3.0.1",
     "@yeger/vue-masonry-wall": "^5.0.21",
@@ -32,12 +38,14 @@
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/tsconfig": "^0.5.1",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.10.0",
     "eslint-plugin-vue": "^9.28.0",
     "gh-pages": "^6.3.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
     "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
     "typescript": "^5.8.3",
     "vite": "^7.0.2",
     "vue-tsc": "^3.0.1"

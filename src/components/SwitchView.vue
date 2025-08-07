@@ -37,8 +37,12 @@ export default defineComponent({
 .switch-view {
   padding-top: 0;
 
-  @media (max-width: 445px) {
+  @media (max-width: 456px) {
     padding-top: 32px;
   }
+
+	.shutter-button {
+		width: 28px;
+	}
 }
 </style>

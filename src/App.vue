@@ -112,7 +112,7 @@ input,
 button {
   font-size: inherit;
   padding: 12px;
-  margin: 0.1em 0.3em;
+  margin: 0 0.3em;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;

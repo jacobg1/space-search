@@ -39,7 +39,10 @@ defineProps<{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0.1em 0.3em;
+  margin: 0 0.3em;
+	align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .loading-spinner {

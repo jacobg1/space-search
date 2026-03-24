@@ -72,7 +72,7 @@
 import SearchForm from '../components/SearchForm.vue'
 import SwitchView from '../components/SwitchView.vue'
 import SwitchPage from '../components/SwitchPage.vue'
-import MasonryWall from '@yeger/vue-masonry-wall'
+import { MasonryWall } from '@yeger/vue-masonry-wall'
 import type { SearchResponse, SearchPageProps } from '@/types/search'
 import { defineComponent } from 'vue'
 

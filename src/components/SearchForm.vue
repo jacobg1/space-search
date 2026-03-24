@@ -80,14 +80,14 @@ export default defineComponent({
 <style lang="scss">
 .search-form {
   display: inline-flex;
-	.search-button {
-		width: 28px;
-	}
+  .search-button {
+    width: 28px;
+  }
   .loading-container {
     width: 54px;
-		.loading-spinner {
-			margin: auto
-		}
+    .loading-spinner {
+      margin: auto;
+    }
   }
   input {
     width: 191px;

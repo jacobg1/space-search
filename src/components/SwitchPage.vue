@@ -108,14 +108,14 @@ export default defineComponent({
     max-width: 80%;
   }
 
-	.shutter-button {
-		width: 33px;
-	}
+  .shutter-button {
+    width: 33px;
+  }
 
   .loading-container {
     padding: 11px 18.5px;
-		height: 21px;
-  	width: 22px;
+    height: 21px;
+    width: 22px;
   }
 }
 </style>

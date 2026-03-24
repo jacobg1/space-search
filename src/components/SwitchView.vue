@@ -41,8 +41,8 @@ export default defineComponent({
     padding-top: 32px;
   }
 
-	.shutter-button {
-		width: 28px;
-	}
+  .shutter-button {
+    width: 28px;
+  }
 }
 </style>

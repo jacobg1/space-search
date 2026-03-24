@@ -1,12 +1,13 @@
 import type { SearchResponse } from '@/types/search'
 import Axios from 'axios'
 import { setupCache } from 'axios-cache-interceptor'
+import type { App } from 'vue'
 
 const instance = Axios.create()
 const axios = setupCache(instance)
 
 export default {
-  install: (app: any) => {
+  install: (app: App<Element>) => {
     const getSpaceSearch = async (
       term: string,
       page: string

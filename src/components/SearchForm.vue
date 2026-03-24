@@ -1,25 +1,25 @@
 <template>
-  <p class="form-error" v-if="noTerm && !searchTerm">
+  <p v-if="noTerm && !searchTerm" class="form-error">
     Please enter search term in input field
   </p>
-  <p class="form-error" v-if="!noTerm && resultLength === 0">
+  <p v-if="!noTerm && resultLength === 0" class="form-error">
     No results please try again
   </p>
   <div class="search-form">
     <form @submit.prevent>
       <input
         id="form-input"
+        v-model="searchTerm"
         type="text"
         placeholder="Enter search"
         autocomplete="off"
-        v-model="searchTerm"
       />
     </form>
     <ShutterButton
-      className="search-button"
+      class-name="search-button"
       type="submit"
       :loading="loading"
-      :onClick="() => getSearch(searchTerm)"
+      :on-click="() => getSearch(searchTerm)"
     >
       Go!
     </ShutterButton>
@@ -34,12 +34,16 @@ import ShutterButton from './ShutterButton.vue'
 
 export default defineComponent({
   name: 'SearchForm',
-  props: {
-    makeSearch: Function
-  },
 
   components: {
     ShutterButton
+  },
+
+  props: {
+    makeSearch: {
+      type: Function,
+      default: () => null
+    }
   },
 
   setup() {
@@ -80,14 +84,14 @@ export default defineComponent({
 <style lang="scss">
 .search-form {
   display: inline-flex;
-	.search-button {
-		width: 28px;
-	}
+  .search-button {
+    width: 28px;
+  }
   .loading-container {
     width: 54px;
-		.loading-spinner {
-			margin: auto
-		}
+    .loading-spinner {
+      margin: auto;
+    }
   }
   input {
     width: 191px;

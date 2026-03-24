@@ -1,15 +1,15 @@
 <template>
   <div class="switch-view">
     <ShutterButton
-      className="secondary-button"
+      class-name="secondary-button"
       :active="listActive"
-      :onClick="() => makeSwitch && makeSwitch(true)"
+      :on-click="() => makeSwitch && makeSwitch(true)"
     >
       List
     </ShutterButton>
     <ShutterButton
       :active="!listActive"
-      :onClick="() => makeSwitch && makeSwitch(false)"
+      :on-click="() => makeSwitch && makeSwitch(false)"
     >
       Grid
     </ShutterButton>
@@ -22,13 +22,17 @@ import ShutterButton from './ShutterButton.vue'
 
 export default defineComponent({
   name: 'SwitchView',
-  props: {
-    makeSwitch: Function,
-    listActive: Boolean
-  },
 
   components: {
     ShutterButton
+  },
+
+  props: {
+    makeSwitch: {
+      type: Function,
+      default: () => null
+    },
+    listActive: Boolean
   }
 })
 </script>
@@ -41,8 +45,8 @@ export default defineComponent({
     padding-top: 32px;
   }
 
-	.shutter-button {
-		width: 28px;
-	}
+  .shutter-button {
+    width: 28px;
+  }
 }
 </style>

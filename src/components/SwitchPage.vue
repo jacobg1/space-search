@@ -4,10 +4,10 @@
       <div>
         <ShutterButton
           v-if="prevLink"
-          className="secondary-button"
+          class-name="secondary-button"
           :loading="prevLoading"
           :disabled="prevLoading || nextLoading"
-          :onClick="() => getSearch(prevLink, PREV)"
+          :on-click="() => getSearch(prevLink, PREV)"
         >
           Prev
         </ShutterButton>
@@ -17,7 +17,7 @@
           v-if="nextLink"
           :loading="nextLoading"
           :disabled="nextLoading || prevLoading"
-          :onClick="() => getSearch(nextLink, NEXT)"
+          :on-click="() => getSearch(nextLink, NEXT)"
         >
           Next
         </ShutterButton>
@@ -38,15 +38,21 @@ import ShutterButton from './ShutterButton.vue'
 
 export default defineComponent({
   name: 'SwitchPage',
-  props: {
-    makeSearch: Function,
-    paginationLinks: Array as PropType<PaginationLink[]>
-  },
 
   components: {
     ShutterButton
   },
 
+  props: {
+    makeSearch: {
+      type: Function,
+      default: () => null
+    },
+    paginationLinks: {
+      type: Array as PropType<PaginationLink[]>,
+      default: () => []
+    }
+  },
   setup(props) {
     const { NEXT, PREV } = PaginationDirection
 
@@ -108,14 +114,14 @@ export default defineComponent({
     max-width: 80%;
   }
 
-	.shutter-button {
-		width: 33px;
-	}
+  .shutter-button {
+    width: 33px;
+  }
 
   .loading-container {
     padding: 11px 18.5px;
-		height: 21px;
-  	width: 22px;
+    height: 21px;
+    width: 22px;
   }
 }
 </style>

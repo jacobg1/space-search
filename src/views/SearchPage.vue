@@ -2,8 +2,8 @@
   <div class="search">
     <h2 class="title">Space Search</h2>
 
-    <SearchForm :makeSearch="handleSearch" />
-    <SwitchView :listActive="isList" :makeSwitch="handleSwitch" />
+    <SearchForm :make-search="handleSearch" />
+    <SwitchView :list-active="isList" :make-switch="handleSwitch" />
 
     <div v-if="!isList" class="gallery">
       <masonry-wall :items="results" :max-columns="6" :column-width="290" :gap="20">
@@ -21,8 +21,8 @@
               ></silent-box>
             </div>
             <p
-              class="description"
               v-if="item.description_508 && item.description_508 !== item.title"
+              class="description"
             >
               {{ item.description_508.toLowerCase() }}
             </p>
@@ -36,16 +36,16 @@
     </div>
 
     <div v-if="isList">
-      <div id="list" v-for="(result, index) in results" :key="index">
+      <div v-for="(result, index) in results" id="list" :key="index">
         <div v-if="result" class="list-container">
           <h2 v-if="result.title">{{ result.title }}</h2>
           <p
-            class="description"
             v-if="result.description_508 && result.description_508 !== result.title"
+            class="description"
           >
             {{ result.description_508.toLowerCase() }}
           </p>
-          <div class="keyword-holder" v-if="result.keywords">
+          <div v-if="result.keywords" class="keyword-holder">
             <p class="keyword-title">Keywords:</p>
             <p>{{ result.keywords }}</p>
           </div>
@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    <SwitchPage :makeSearch="handleSearch" :paginationLinks="paginationLinks" />
+    <SwitchPage :make-search="handleSearch" :pagination-links="paginationLinks" />
   </div>
 </template>
 

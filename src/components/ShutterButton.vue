@@ -1,13 +1,14 @@
 <template>
   <button
     v-if="!loading"
-    v-bind:class="{
-      loading,
-      active: active || false
-    }"
     :disabled="loading || disabled || false"
     :type="type || 'button'"
-    :class="['shutter-button', className]"
+    :class="[
+      'shutter-button',
+      className,
+      loading ? 'loading' : '',
+      active ? 'active' : ''
+    ]"
     @click="onClick"
   >
     <slot></slot>
@@ -40,7 +41,7 @@ defineProps<{
   flex-direction: column;
   justify-content: center;
   margin: 0 0.3em;
-	align-items: center;
+  align-items: center;
   flex-wrap: wrap;
   align-content: center;
 }

@@ -5,7 +5,6 @@ import Particles from '@tsparticles/vue3'
 import { loadFull } from 'tsparticles'
 import spaceSearch from './services/spaceSearch'
 import VueSilentbox from 'vue-silentbox'
-import MasonryWall from '@yeger/vue-masonry-wall'
 
 import 'vue-silentbox/dist/style.css'
 
@@ -19,7 +18,7 @@ app.use(Particles, {
     await loadFull(engine)
   }
 })
+
 app.use(spaceSearch)
-app.use(MasonryWall)
 
 app.mount('#app')
